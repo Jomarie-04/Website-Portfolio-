@@ -1,0 +1,445 @@
+div {
+background: linear-gradient(to right, #808080, #C4A484); /* Blue gradient background */
+}
+
+.greeting {
+    font-size: 2.5em; /* Adjust as needed */
+    font-weight: 700; /* Bold */
+    margin-bottom: -0.2em; /* Reduce space between lines */
+    color:white;
+}
+
+.name {
+    font-size: 3.5em; /* Larger for the name */
+    font-weight: 700; /* Bold */
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: -0.1em; /* Reduce space between lines */
+    color:white;
+}
+
+.name span {
+    color: #ff5722; /* Orange color for 'jomarie' */
+}
+
+.role {
+    font-size: 1.5em; /* Slightly smaller than the name */
+    font-weight: 500; /* Bold */
+    margin-top: 0; /* Remove default top margin */
+    color:white;
+}
+ img {
+    border-radius: 50%; /* Circular image */
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border: 5px solid #fff; /* White border around the image */
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 0 auto; /* Centers horizontally */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+body {
+    font-family: 'Arial', 
+    line-height: 1.1;
+    color: #333; /* Dark gray for good readability */
+    background-color: #f4f4f4; /* Light gray background */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px; /* Max width for content */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #333; /* Consistent heading color */
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.8em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.2em;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    position: relative; /* For potential underline effect */
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #007bff; /* Accent color for underline */
+    margin: 10px auto 0;
+}
+
+h3 {
+    font-size: 1.6em;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #007bff; /* Accent color for subheadings */
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #007bff; /* Blue for links */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* --- Sections (General Styling) --- */
+section {
+    padding: 60px 20px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 1000px; /* Limit section width for better readability */
+}
+
+/* Specific section adjustments */
+#about ul,
+#skills ul {
+    columns: 2; /* Display list items in two columns for better use of space */
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    padding-left: 20px; /* Indent lists slightly */
+}
+
+#about li,
+#skills li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px; /* Space for custom bullet */
+}
+
+#about li::before,
+#skills li::before {
+    content: '•'; /* Custom bullet point */
+    color: #007bff;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* --- Projects Section --- */
+#projects article {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+#projects article:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+#projects article h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#projects article p {
+    margin-bottom: 10px;
+}
+
+#projects article a {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#projects article a:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+/* --- Resume Section --- */
+#resume a {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #28a745; /* Green for resume download */
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.1em;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#resume a:hover {
+    background-color: #218838;
+    text-decoration: none;
+}
+
+/* --- Certifications Section --- */
+#certifications article {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#certifications article h3 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#certifications article p {
+    font-size: 0.95em;
+    color: #555;
+}
+
+/* --- Contact Section --- */
+#contact {
+    text-align: center;
+}
+
+#contact form {
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+#contact label {
+    text-align: left;
+    font-weight: bold;
+    color: #555;
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#contact textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px;
+}
+
+#contact button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+#contact button:hover {
+    background-color: #0056b3;
+}
+
+#contact p {
+    margin-top: 10px;
+}
+
+/* --- Blog Section --- */
+#blog article {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#blog article h3 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+footer nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Space between links */
+    margin-bottom: 20px;
+}
+
+footer nav ul li a {
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+footer nav ul li a:hover {
+    color: #007bff; /* Blue on hover */
+}
+
+footer div a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+footer div a:hover {
+    color: #007bff;
+}
+
+/* --- Responsive Design (Media Queries) --- */
+
+/* For screens smaller than 768px (e.g., tablets and large phones) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    h3 {
+        font-size: 1.4em;
+    }
+
+    header {
+        padding: 40px 15px;
+    }
+
+    header img {
+        width: 150px;
+        height: 150px;
+    }
+
+    section {
+        padding: 40px 15px;
+        margin: 15px auto;
+    }
+
+    #about ul,
+    #skills ul {
+        columns: 1; /* Stack list items on smaller screens */
+        -webkit-columns: 1;
+        -moz-columns: 1;
+        padding-left: 0;
+    }
+
+    #about li,
+    #skills li {
+        padding-left: 0; /* Remove custom bullet indent if columns are removed */
+    }
+
+    #about li::before,
+    #skills li::before {
+        display: none; /* Hide custom bullet if no indent */
+    }
+
+    #projects article a {
+        display: block; /* Stack project links */
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    #contact form {
+        padding: 15px;
+    }
+
+    footer nav ul {
+        flex-direction: column; /* Stack footer nav links */
+        gap: 10px;
+    }
+
+    footer div a {
+        display: block; /* Stack social links */
+        margin-bottom: 10px;
+    }
+}
+
+/* For screens smaller than 480px (e.g., small phones) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    header p {
+        font-size: 1.1em;
+    }
+
+    header img {
+        width: 120px;
+        height: 120px;
+    }
+
+    section {
+        padding: 30px 10px;
+    }
+
+    #resume a {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
