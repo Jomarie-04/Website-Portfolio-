@@ -1,70 +1,176 @@
-div {
-background: linear-gradient(to right, #808080, #C4A484); /* Blue gradient background */
+/* Universal Box-Sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #808080, #C4A484);
+    /* Smooth scroll for anchor links */
+    scroll-behavior: smooth;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 4px;
+}
+
+.navbar ul li a:hover,
+.navbar ul li a:focus {
+    background-color: #555;
+    color: #4CAF50;
+    /* Animation: slight scale on hover */
+    transform: scale(1.05);
+}
+
+
+/* --- Keyframe Animations --- */
+
+/* Fade in from bottom for sections */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subtle pulse for images or important elements */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Hero Section Animations */
+.hero-section .greeting,
+.hero-section .name,
+.hero-section .role {
+    opacity: 0; /* Start invisible */
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-section .greeting {
+    animation-delay: 0.2s; /* Delay for sequential appearance */
+}
+.hero-section .name {
+    animation-delay: 0.4s;
+}
+.hero-section .role {
+    animation-delay: 0.6s;
+}
+
+/* Hero Section Image Animation */
+.hero-section img {
+    opacity: 0; /* Start invisible */
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.8s; /* After text appears */
+}
+
+
+/* Hero Section Styles */
+.hero-section {
+    background: linear-gradient(to right, #808080, #C4A484);
+    text-align: center;
+    padding: 50px 20px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Important to hide elements before their animation starts */
 }
 
 .greeting {
-    font-size: 2.5em; /* Adjust as needed */
-    font-weight: 700; /* Bold */
-    margin-bottom: -0.2em; /* Reduce space between lines */
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: -0.2em;
     color:white;
 }
 
 .name {
-    font-size: 3.5em; /* Larger for the name */
-    font-weight: 700; /* Bold */
-    margin-top: 0; /* Remove default top margin */
-    margin-bottom: -0.1em; /* Reduce space between lines */
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: -0.1em;
     color:white;
     margin: 0 auto;
 }
 
 .name span {
-    color: #ff5722; /* Orange color for 'jomarie' */
+    color: #ff5722;
 }
 
 .role {
-    font-size: 1.5em; /* Slightly smaller than the name */
-    font-weight: 500; /* Bold */
-    margin-top: 0; /* Remove default top margin */
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-top: 0;
     color:white;
 }
- img {
-    border-radius: 50%; /* Circular image */
+
+/* Image styles - targeting specifically the image in the hero section for clarity */
+.hero-section img {
+    border-radius: 50%;
     width: 300px;
     height: 300px;
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    border: 5px solid #fff; /* White border around the image */
+    object-fit: cover;
+    border: 5px solid #fff;
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: block;
-    margin: 0 auto; /* Centers horizontally */
+    margin: 0 auto;
 }
 
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-}
-
-body {
-    font-family: 'Arial', 
-    line-height: 1.1;
-    color: #333; /* Dark gray for good readability */
-    background-color: #f4f4f4; /* Light gray background */
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to right, #808080, #C4A484); /* Blue gradient background */
-}
 
 .container {
-    max-width: 1200px; /* Max width for content */
-    margin: 0 auto; /* Center the container */
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
 h1, h2, h3 {
-    color: #333; /* Consistent heading color */
+    color: #333;
     margin-bottom: 15px;
 }
 
@@ -79,7 +185,7 @@ h2 {
     text-align: center;
     margin-top: 40px;
     margin-bottom: 30px;
-    position: relative; /* For potential underline effect */
+    position: relative;
 }
 
 h2::after {
@@ -87,7 +193,7 @@ h2::after {
     display: block;
     width: 60px;
     height: 3px;
-    background: #007bff; /* Accent color for underline */
+    background: #007bff;
     margin: 10px auto 0;
 }
 
@@ -95,7 +201,7 @@ h3 {
     font-size: 1.6em;
     margin-top: 25px;
     margin-bottom: 10px;
-    color: #007bff; /* Accent color for subheadings */
+    color: #007bff;
 }
 
 p {
@@ -103,18 +209,18 @@ p {
 }
 
 a {
-    color: #007bff; /* Blue for links */
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s ease;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Keep for hover effects */
 }
 
 a:hover {
-    color: #0056b3; /* Darker blue on hover */
-    text-decoration: underline; /* Add underline on hover */
+    color: #0056b3;
+    text-decoration: underline;
 }
 
 ul {
-    list-style: none; /* Remove default bullet points */
+    list-style: none;
     padding: 0;
     margin-bottom: 15px;
 }
@@ -123,35 +229,52 @@ li {
     margin-bottom: 5px;
 }
 
-/* --- Sections (General Styling) --- */
+/* --- Sections (General Styling & Animation on Load/Scroll) --- */
 section {
     padding: 60px 20px;
     margin: 20px auto;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    max-width: 1000px; /* Limit section width for better readability */
+    max-width: 1000px;
+
+    /* Animation for sections - they will appear smoothly */
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px); /* Start slightly below */
+    animation: fadeInUp 0.7s ease-out forwards;
+    /* Add a class to apply animation only when visible.
+       This typically requires JavaScript (Intersection Observer API) for true "on-scroll" animation.
+       For now, they will animate when the page loads. */
 }
 
 /* Specific section adjustments */
+#about { animation-delay: 1s; } /* Delay for about section */
+#projects { animation-delay: 1.2s; } /* Delay for projects section */
+#skills { animation-delay: 1.4s; }
+#resume { animation-delay: 1.6s; }
+#certifications { animation-delay: 1.8s; }
+#contact { animation-delay: 2s; }
+#blog { animation-delay: 2.2s; }
+
+
 #about ul,
 #skills ul {
-    columns: 2; /* Display list items in two columns for better use of space */
+    columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
-    padding-left: 20px; /* Indent lists slightly */
+    padding-left: 20px;
 }
 
 #about li,
 #skills li {
     margin-bottom: 10px;
     position: relative;
-    padding-left: 25px; /* Space for custom bullet */
+    padding-left: 25px;
 }
 
 #about li::before,
 #skills li::before {
-    content: '•'; /* Custom bullet point */
+    content: '•';
     color: #007bff;
     font-weight: bold;
     position: absolute;
@@ -166,11 +289,12 @@ section {
     padding: 25px;
     margin-bottom: 25px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add shadow to transition */
 }
 
 #projects article:hover {
-    transform: translateY(-5px); /* Slight lift effect on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* More pronounced shadow on hover */
 }
 
 #projects article h3 {
@@ -189,29 +313,31 @@ section {
     background-color: #007bff;
     color: #fff;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for button hover */
 }
 
 #projects article a:hover {
     background-color: #0056b3;
     text-decoration: none;
+    transform: scale(1.05); /* Slight scale on link hover */
 }
 
 /* --- Resume Section --- */
 #resume a {
     display: inline-block;
     padding: 12px 25px;
-    background-color: #28a745; /* Green for resume download */
+    background-color: #28a745;
     color: #fff;
     border-radius: 5px;
     font-size: 1.1em;
     margin-top: 20px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for button hover */
 }
 
 #resume a:hover {
     background-color: #218838;
     text-decoration: none;
+    transform: scale(1.05); /* Slight scale on button hover */
 }
 
 /* --- Certifications Section --- */
@@ -222,6 +348,12 @@ section {
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add transition for hover */
+}
+
+#certifications article:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
 }
 
 #certifications article h3 {
@@ -233,6 +365,21 @@ section {
     font-size: 0.95em;
     color: #555;
 }
+
+/* Image specifically for the certificate */
+#certifications article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: transform 0.3s ease; /* Add transition for hover */
+}
+
+#certifications article img:hover {
+    transform: scale(1.02); /* Slight zoom on image hover */
+}
+
 
 /* --- Contact Section --- */
 #contact {
@@ -265,10 +412,19 @@ section {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+#contact input[type="text"]:focus,
+#contact input[type="email"]:focus,
+#contact textarea:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Subtle glow on focus */
+    outline: none; /* Remove default outline */
 }
 
 #contact textarea {
-    resize: vertical; /* Allow vertical resizing */
+    resize: vertical;
     min-height: 100px;
 }
 
@@ -280,11 +436,12 @@ section {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1em;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for button hover */
 }
 
 #contact button:hover {
     background-color: #0056b3;
+    transform: scale(1.03); /* Slight scale on button hover */
 }
 
 #contact p {
@@ -299,6 +456,12 @@ section {
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add transition for hover */
+}
+
+#blog article:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
 }
 
 #blog article h3 {
@@ -308,8 +471,8 @@ section {
 
 /* --- Footer --- */
 footer {
-    background-color: #333; /* Dark background */
-    color: #fff; /* White text */
+    background-color: #333;
+    color: #fff;
     text-align: center;
     padding: 30px 20px;
     margin-top: 40px;
@@ -323,7 +486,7 @@ footer p {
 footer nav ul {
     display: flex;
     justify-content: center;
-    gap: 25px; /* Space between links */
+    gap: 25px;
     margin-bottom: 20px;
 }
 
@@ -334,7 +497,7 @@ footer nav ul li a {
 }
 
 footer nav ul li a:hover {
-    color: #007bff; /* Blue on hover */
+    color: #007bff;
 }
 
 footer div a {
@@ -348,10 +511,32 @@ footer div a:hover {
     color: #007bff;
 }
 
+footer a[href*="terms-privacy"] {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+footer a[href*="terms-privacy"]:hover {
+    color: #007bff;
+}
+
 /* --- Responsive Design (Media Queries) --- */
 
 /* For screens smaller than 768px (e.g., tablets and large phones) */
 @media (max-width: 768px) {
+    /* Navbar responsiveness */
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar ul li {
+        margin: 10px 0;
+    }
+
     h1 {
         font-size: 2.2em;
     }
@@ -364,11 +549,11 @@ footer div a:hover {
         font-size: 1.4em;
     }
 
-    header {
+    .hero-section {
         padding: 40px 15px;
     }
 
-    header img {
+    .hero-section img {
         width: 150px;
         height: 150px;
     }
@@ -380,7 +565,7 @@ footer div a:hover {
 
     #about ul,
     #skills ul {
-        columns: 1; /* Stack list items on smaller screens */
+        columns: 1;
         -webkit-columns: 1;
         -moz-columns: 1;
         padding-left: 0;
@@ -388,16 +573,16 @@ footer div a:hover {
 
     #about li,
     #skills li {
-        padding-left: 0; /* Remove custom bullet indent if columns are removed */
+        padding-left: 0;
     }
 
     #about li::before,
     #skills li::before {
-        display: none; /* Hide custom bullet if no indent */
+        display: none;
     }
 
     #projects article a {
-        display: block; /* Stack project links */
+        display: block;
         margin-bottom: 10px;
         margin-right: 0;
     }
@@ -407,12 +592,12 @@ footer div a:hover {
     }
 
     footer nav ul {
-        flex-direction: column; /* Stack footer nav links */
+        flex-direction: column;
         gap: 10px;
     }
 
     footer div a {
-        display: block; /* Stack social links */
+        display: block;
         margin-bottom: 10px;
     }
 }
@@ -427,11 +612,11 @@ footer div a:hover {
         font-size: 1.6em;
     }
 
-    header p {
+    .hero-section p {
         font-size: 1.1em;
     }
 
-    header img {
+    .hero-section img {
         width: 120px;
         height: 120px;
     }
