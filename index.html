@@ -8,128 +8,166 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#blog">Blog</a></li>
-        </ul>
-    </nav>
-
-    <div class="hero-section">
-        <p class="greeting">Hi</p>
-        <p class="name">I'm <span>Jomarie</span></p>
-        <p class="role">a Diploma in Information Technology Student</p>
-        <img src="jomarie.jpg" alt="Jomarie Nazareth" />
+    <div id="login-overlay">
+        <div class="login-container">
+            <h2>Portfolio Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p class="login-tip">Hint: username 'jomarie', password 'jomarie123'</p>
+            <p class="security-warning">
+                <strong>WARNING:</strong> This login is for demonstration ONLY.
+                It provides NO real security and can be easily bypassed.
+                Do NOT use this for protecting sensitive information.
+            </p>
+        </div>
     </div>
-
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Passionate about crafting compelling stories through video editing and an avid mobile gamer always seeking the next challenge.</p>
-        <h3>Education</h3>
-        <p>Diploma in Information Technology at  Asian College, Dumaguete City, Philippines Relevant Coursework: Object-Oriented Programming, Data Structures, Web Development Fundamentals </p>
-        <h3>Career Goals</h3>
-        <p>Seeking an entry-level role or internship within the IT industry to apply foundational knowledge in software development and multimedia, aiming to contribute to projects involving digital content creation, UI/UX, or game development.</p>
-        <h3>Skills Summary</h3>
-        <ul>
-            <li>Video Editor</li>
-            <li>Problem Solving</li>
-            <li>Computer Skills</li>
-        </ul>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-        <article>
-            <h3>Project Title</h3>
-            <p>Description of the project.</p>
-            <p>Tools/Technologies Used: [List]</p>
-            <a href="live-demo-link">Live Demo</a>
-            <a href="https://github.com/Jomarie-04/Website-Portfolio-">View Source Code</a>
-        </article>
-        </section>
-
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-        </ul>
-        <h3>Tools/Frameworks</h3>
-        <ul>
-            <li>MySQL</li>
-        </ul>
-        <h3>Systems & Platforms</h3>
-        <ul>
-            <li>Windows Server</li>
-            <li>Linux</li>
-            <li>Cisco</li>
-        </ul>
-    </section>
-
-    <section id="resume">
-        <h2>Resume</h2>
-        <a href="your-resume.pdf" download>Download My Resume</a>
-    </section>
-
-    <section id="certifications">
-        <h2>Certifications</h2>
-        <article>
-            <h3>Responsive Web Design Developer Certification</h3>
-            <p>Date: April 13 2025</p>
-<img src="certificate.jpg" alt="certificate" />
-            <p>This is a Free Code Camp "Responsive Web Design Developer Certification" awarded to Jomarie B. Nazareth on April 13, 2025. It signifies the successful completion of approximately 300 hours of work in responsive web design. The certificate is signed by Quincy Larson, Executive Director of freeCodeCamp.org.</p>
-        </article>
-        </section>
-
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-        <p>Email: jnazareth.student@asiancollege.edu.ph</p>
-        <p>LinkedIn: <a href="your-linkedin-link">Your LinkedIn</a></p>
-        <p>GitHub: <a href="your-github-link">Your GitHub</a></p>
-    </section>
-
-    <section id="blog">
-        <h2>Blog</h2>
-        <article>
-            <h3>Article Title</h3>
-            <p>Summary of the article.</p>
-            <a href="article-link">Read More</a>
-        </article>
-        </section>
-
-    <footer>
-        <p>&copy; 2025 Jomarie. All rights reserved.</p>
-        <nav>
+    <div id="portfolio-content" class="hidden">
+        <nav class="navbar">
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#resume">Resume</a></li>
+                <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#blog">Blog</a></li>
             </ul>
         </nav>
-        <div>
-            <a href="https://www.facebook.com/share/16d79HQK24/">Facebook</a>
-            <a href="your-twitter-link">Twitter</a>
-            <a href="https://www.instagram.com/eu4riea?igsh=YzljYTk1ODg3Zg==">Instagram</a>
-        </div>
-        <a href="terms-privacy-link">Terms & Privacy</a>
-    </footer>
 
+        <div class="hero-section">
+            <p class="greeting">Hi</p>
+            <p class="name">I'm <span>Jomarie</span></p>
+            <p class="role">a Diploma in Information Technology Student</p>
+            <img src="jomarie.jpg" alt="Jomarie Nazareth Photo" />
+            </div>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Passionate about crafting compelling stories through video editing and an avid mobile gamer always seeking the next challenge.</p>
+            <h3>Education</h3>
+            <p>Diploma in Information Technology at Asian College, Dumaguete City, Philippines</p>
+            <p>Relevant Coursework: Object-Oriented Programming, Data Structures, Web Development Fundamentals </p>
+            <h3>Career Goals</h3>
+            <p>Seeking an entry-level role or internship within the IT industry to apply foundational knowledge in software development and multimedia, aiming to contribute to projects involving digital content creation, UI/UX, or game development.</p>
+            <h3>Skills Summary</h3>
+            <ul>
+                <li>Video Editor</li>
+                <li>Problem Solving</li>
+                <li>Computer Skills</li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <article>
+                <h3>[Your Project Title 1]</h3>
+                <p>Description of the project. What problem did it solve? What was your role? What did you learn?</p>
+                <p>Tools/Technologies Used: [HTML, CSS, JavaScript, MySQL]</p>
+                <a href="[Live Demo Link - if available]">Live Demo</a>
+                <a href="https://github.com/Jomarie-04/Website-Portfolio-">View Source Code</a>
+            </article>
+            <article>
+                <h3>[Your Project Title 2]</h3>
+                <p>Description of your second project.</p>
+                <p>Tools/Technologies Used: [PHP, MySQL]</p>
+                <a href="[Live Demo Link - if available]">Live Demo</a>
+                <a href="[GitHub Link for Project 2]">View Source Code</a>
+            </article>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <h3>Programming Languages</h3>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>[Add other languages like Python, Java, C#, PHP, etc.]</li>
+            </ul>
+            <h3>Tools & Frameworks</h3>
+            <ul>
+                <li>MySQL</li>
+                <li>[Add other tools/frameworks like Git, VS Code, React, Node.js, Flask, etc.]</li>
+            </ul>
+            <h3>Systems & Platforms</h3>
+            <ul>
+                <li>Windows Server</li>
+                <li>Linux</li>
+                <li>Cisco</li>
+                <li>[Add other systems/platforms]</li>
+            </ul>
+        </section>
+
+        <section id="resume">
+            <h2>Resume</h2>
+            <p>Download my full resume to learn more about my experience and qualifications.</p>
+            <a href="[your-resume.pdf]" download="Jomarie_Nazareth_Resume.pdf">Download My Resume</a>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <article>
+                <h3>Responsive Web Design Developer Certification</h3>
+                <p>Date: April 13, 2025</p>
+                <img src="certificate.jpg" alt="Free Code Camp Responsive Web Design Certificate" />
+                <p>This is a Free Code Camp "Responsive Web Design Developer Certification" awarded to Jomarie B. Nazareth on April 13, 2025. It signifies the successful completion of approximately 300 hours of work in responsive web design. The certificate is signed by Quincy Larson, Executive Director of freeCodeCamp.org.</p>
+                </article>
+            </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p>Email: jnazareth.student@asiancollege.edu.ph</p>
+            <p>LinkedIn: <a href="[your-linkedin-link]" target="_blank">Your LinkedIn Profile</a></p>
+            <p>GitHub: <a href="[your-github-link]" target="_blank">Your GitHub Profile</a></p>
+            <p>Facebook: <a href="https://www.facebook.com/share/16d79HQK24/" target="_blank">Your Facebook Profile</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/eu4riea?igsh=YzljYTk1ODg3Zg==" target="_blank">Your Instagram Profile</a></p>
+            </section>
+
+        <section id="blog">
+            <h2>Blog</h2>
+            <article>
+                <h3>[Article Title 1]</h3>
+                <p>Summary of the article. This could be about a recent project, a new technology you learned, or a general thought on IT.</p>
+                <a href="[article-link-1]">Read More</a>
+            </article>
+            <article>
+                <h3>[Article Title 2]</h3>
+                <p>Summary of your second blog post.</p>
+                <a href="[article-link-2]">Read More</a>
+            </article>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Jomarie. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/16d79HQK24/" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/eu4riea?igsh=YzljYTk1ODg3Zg==" target="_blank">Instagram</a>
+                </div>
+            </footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
