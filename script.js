@@ -1,97 +1,158 @@
-// Smooth scroll for internal anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+document.addEventListener('DOMContentLoaded', () => {
 
-// Form validation
-document.querySelector('#contact form').addEventListener('submit', function(e) {
-    const name = document.querySelector('#name');
-    const email = document.querySelector('#email');
-    const message = document.querySelector('#message');
+    // --- INSECURE CLIENT-SIDE LOGIN LOGIC ---
+    // DO NOT USE THIS FOR REAL SECURITY. IT CAN BE EASILY BYPASSED.
+    const loginForm = document.getElementById('login-form');
+    const loginOverlay = document.getElementById('login-overlay');
+    const portfolioContent = document.getElementById('portfolio-content');
 
-    if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
-        e.preventDefault();
-        alert('Please fill out all fields.');
-    } else if (!validateEmail(email.value)) {
-        e.preventDefault();
-        alert('Please enter a valid email address.');
+    // Check if user is already "logged in" (e.g., from a previous session)
+    // In a real app, this would involve server-side session checks.
+    if (sessionStorage.getItem('loggedIn') === 'true') {
+        loginOverlay.style.display = 'none';
+        portfolioContent.classList.remove('hidden');
+    } else {
+        loginOverlay.style.display = 'flex'; // Ensure it's visible if not logged in
+        portfolioContent.classList.add('hidden'); // Ensure content is hidden
     }
-});
 
-// Basic email format validation
-function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-}
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
 
-// Optional: Highlight current section in nav as you scroll
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('footer nav ul li a');
-    let current = '';
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (pageYOffset >= sectionTop) {
-            current = section.getAttribute('id');
-        }
-    });
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-    document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation links
+            // Hardcoded credentials for demonstration (INSECURE!)
+            if (username === 'demo' && password === 'password123') {
+                sessionStorage.setItem('loggedIn', 'true'); // "Log in" the user
+                loginOverlay.style.display = 'none'; // Hide the login overlay
+                portfolioContent.classList.remove('hidden'); // Show portfolio content
+            } else {
+                alert('Invalid username or password. (Hint: demo / password123)');
+                // Clear password field for security
+                passwordInput.value = '';
+            }
+        });
+    }
+    // --- END OF INSECURE LOGIN LOGIC ---
+
+
+    // --- Smooth scroll for internal anchor links ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault(); // Prevent default jump behavior
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth' // Smooth scroll effect
-            });
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // Adjust scroll position to account for fixed navbar height
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
-    // Intersection Observer for "on-scroll" animations
-    const sections = document.querySelectorAll('section');
-    const heroElements = document.querySelectorAll('.hero-section .greeting, .hero-section .name, .hero-section .role, .hero-section img');
+    // --- Form validation for contact form ---
+    const contactForm = document.querySelector('#contact-form'); // Changed ID to contact-form
+    if (contactForm) { // Ensure the form exists before adding listener
+        contactForm.addEventListener('submit', function(e) {
+            const name = document.querySelector('#name');
+            const email = document.querySelector('#email');
+            const message = document.querySelector('#message');
 
-    // Options for the Intersection Observer
+            if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+                e.preventDefault();
+                alert('Please fill out all fields.');
+            } else if (!validateEmail(email.value)) {
+                e.preventDefault();
+                alert('Please enter a valid email address.');
+            }
+            // Note: For a real contact form, you'd send data to a server here.
+            // If submission is successful and you want to prevent refresh:
+            // e.preventDefault(); // Uncomment this if you handle submission via AJAX
+            // alert('Message sent successfully!');
+            // this.reset(); // Reset form fields
+        });
+    }
+
+    // Basic email format validation
+    function validateEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+    // --- Intersection Observer for "on-scroll" animations ---
+    const animatedElements = document.querySelectorAll('section, .hero-section .greeting, .hero-section .name, .hero-section .role, .hero-section img');
+
     const observerOptions = {
         root: null, // Use the viewport as the root
-        rootMargin: '0px', // No margin around the root
+        rootMargin: '0px',
         threshold: 0.1 // Trigger when 10% of the element is visible
     };
 
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
+    const elementObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // If section is in view, add the 'animate-visible' class
+                // Add a class that triggers the CSS animation
                 entry.target.classList.add('animate-visible');
-                // Optional: Stop observing once animated if you only want it to animate once
-                // observer.unobserve(entry.target);
-            } else {
-                // Optional: Remove the class if section goes out of view
-                // This allows re-animation if user scrolls back and forth
+                // Stop observing once animated if you only want it to animate once
+                observer.unobserve(entry.target);
+            }
+            // Optional: If you want elements to re-animate when scrolling back,
+            // remove the `observer.unobserve(entry.target);` line above
+            // and uncomment the `else` block below:
+            /*
+            else {
                 entry.target.classList.remove('animate-visible');
             }
+            */
         });
     }, observerOptions);
 
-    // Observe each section
-    sections.forEach(section => {
-        sectionObserver.observe(section);
+    // Observe each relevant element
+    animatedElements.forEach(element => {
+        elementObserver.observe(element);
     });
 
-});
+
+    // --- Highlight current section in navigation as you scroll ---
+    const sections = document.querySelectorAll('section');
+    // Select both main nav and footer nav links
+    const navLinks = document.querySelectorAll('.navbar ul li a, footer nav ul li a');
+    const mainNavbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+        let currentSectionId = '';
+        const scrollY = window.pageYOffset;
+        const navbarHeight = mainNavbar.offsetHeight; // Get current navbar height
+
+        sections.forEach(section => {
+            // Adjust offset to trigger highlighting slightly before section is at top
+            // Account for sticky navbar height
+            const sectionTop = section.offsetTop - navbarHeight - 50; // Added extra buffer
+            const sectionHeight = section.offsetHeight; // Use offsetHeight for full element height
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active'); // Remove active from all links first
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active'); // Add active to the current section's link
+            }
+        });
+    });
+
+}); // End of DOMContentLoaded
