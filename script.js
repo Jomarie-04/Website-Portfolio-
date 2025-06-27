@@ -27,12 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = passwordInput.value.trim();
 
             // Hardcoded credentials for demonstration (INSECURE!)
-            if (username === 'demo' && password === 'password123') {
+            if (username === 'jomarie' && password === 'jomarie4') {
                 sessionStorage.setItem('loggedIn', 'true'); // "Log in" the user
                 loginOverlay.style.display = 'none'; // Hide the login overlay
                 portfolioContent.classList.remove('hidden'); // Show portfolio content
             } else {
-                alert('Invalid username or password. (Hint: demo / password123)');
+                alert('Invalid username or password. (Hint: jomarie / jomarie4)');
                 // Clear password field for security
                 passwordInput.value = '';
             }
