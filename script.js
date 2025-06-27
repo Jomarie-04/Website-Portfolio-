@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const loginOverlay = document.getElementById('login-overlay');
     const portfolioContent = document.getElementById('portfolio-content');
+    const logoutBtn = document.getElementById('logout-btn'); // Get the new logout button
 
     // Check if user is already "logged in" (e.g., from a previous session)
-    // In a real app, this would involve server-side session checks.
     if (sessionStorage.getItem('loggedIn') === 'true') {
         loginOverlay.style.display = 'none';
         portfolioContent.classList.remove('hidden');
@@ -38,7 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    // --- END OF INSECURE LOGIN LOGIC ---
+
+    // --- NEW: Logout Logic ---
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('loggedIn'); // Remove the login status
+            loginOverlay.style.display = 'flex'; // Show the login overlay
+            portfolioContent.classList.add('hidden'); // Hide portfolio content
+            // Optional: Scroll to the top of the page after logout
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+    // --- END OF INSECURE LOGIN/LOGOUT LOGIC ---
 
 
     // --- Smooth scroll for internal anchor links ---
@@ -63,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Form validation for contact form ---
-    const contactForm = document.querySelector('#contact-form'); // Changed ID to contact-form
-    if (contactForm) { // Ensure the form exists before adding listener
+    const contactForm = document.querySelector('#contact-form');
+    if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             const name = document.querySelector('#name');
             const email = document.querySelector('#email');
@@ -77,11 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 alert('Please enter a valid email address.');
             }
-            // Note: For a real contact form, you'd send data to a server here.
-            // If submission is successful and you want to prevent refresh:
-            // e.preventDefault(); // Uncomment this if you handle submission via AJAX
-            // alert('Message sent successfully!');
-            // this.reset(); // Reset form fields
         });
     }
 
@@ -108,14 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Stop observing once animated if you only want it to animate once
                 observer.unobserve(entry.target);
             }
-            // Optional: If you want elements to re-animate when scrolling back,
-            // remove the `observer.unobserve(entry.target);` line above
-            // and uncomment the `else` block below:
-            /*
-            else {
-                entry.target.classList.remove('animate-visible');
-            }
-            */
         });
     }, observerOptions);
 
@@ -127,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Highlight current section in navigation as you scroll ---
     const sections = document.querySelectorAll('section');
-    // Select both main nav and footer nav links
     const navLinks = document.querySelectorAll('.navbar ul li a, footer nav ul li a');
     const mainNavbar = document.querySelector('.navbar');
 
@@ -137,10 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const navbarHeight = mainNavbar.offsetHeight; // Get current navbar height
 
         sections.forEach(section => {
-            // Adjust offset to trigger highlighting slightly before section is at top
-            // Account for sticky navbar height
-            const sectionTop = section.offsetTop - navbarHeight - 50; // Added extra buffer
-            const sectionHeight = section.offsetHeight; // Use offsetHeight for full element height
+            const sectionTop = section.offsetTop - navbarHeight - 50;
+            const sectionHeight = section.offsetHeight;
 
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                 currentSectionId = section.getAttribute('id');
@@ -148,9 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         navLinks.forEach(link => {
-            link.classList.remove('active'); // Remove active from all links first
+            // Ensure the logout button isn't accidentally styled as active
+            if (!link.classList.contains('logout-btn')) { // Exclude logout button
+                link.classList.remove('active');
+            }
             if (link.getAttribute('href') === `#${currentSectionId}`) {
-                link.classList.add('active'); // Add active to the current section's link
+                link.classList.add('active');
             }
         });
     });
