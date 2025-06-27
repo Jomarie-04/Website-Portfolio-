@@ -13,10 +13,101 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #808080, #C4A484);
+    background: linear-gradient(to right, #000000, #C4A484);
     /* Smooth scroll for anchor links */
     scroll-behavior: smooth;
 }
+
+/* --- INSECURE CLIENT-SIDE LOGIN STYLES --- */
+#login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0,);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensures it's on top of everything */
+}
+
+.login-container {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.login-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 2em;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#login-form label {
+    text-align: left;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: -10px; /* Pull label closer to input */
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+}
+
+#login-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+}
+
+#login-form button:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
+}
+
+.login-tip {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 15px;
+}
+
+.security-warning {
+    color: #d9534f; /* Red color for warning */
+    font-size: 0.8em;
+    margin-top: 20px;
+    border: 1px solid #d9534f;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fdd;
+}
+/* Hide portfolio content by default until login */
+#portfolio-content.hidden {
+    display: none;
+}
+/* --- END OF INSECURE LOGIN STYLES --- */
+
 
 /* Navigation Bar Styles */
 .navbar {
@@ -47,22 +138,33 @@ body {
     color: #fff;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     border-radius: 4px;
 }
 
 .navbar ul li a:hover,
 .navbar ul li a:focus {
     background-color: #555;
-    color: #4CAF50;
-    /* Animation: slight scale on hover */
+    color: #007bff; /* Changed to match primary accent color */
     transform: scale(1.05);
+}
+
+/* Style for active navigation link */
+.navbar ul li a.active {
+    background-color: #007bff; /* Primary accent color for active link */
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.4);
+}
+/* Style for active footer navigation link */
+footer nav ul li a.active {
+    color: #007bff;
+    text-decoration: underline;
 }
 
 
 /* --- Keyframe Animations --- */
-
-/* Fade in from bottom for sections */
+/* Fade in from bottom for sections and hero elements */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -74,45 +176,6 @@ body {
     }
 }
 
-/* Subtle pulse for images or important elements */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.02);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Hero Section Animations */
-.hero-section .greeting,
-.hero-section .name,
-.hero-section .role {
-    opacity: 0; /* Start invisible */
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.hero-section .greeting {
-    animation-delay: 0.2s; /* Delay for sequential appearance */
-}
-.hero-section .name {
-    animation-delay: 0.4s;
-}
-.hero-section .role {
-    animation-delay: 0.6s;
-}
-
-/* Hero Section Image Animation */
-.hero-section img {
-    opacity: 0; /* Start invisible */
-    animation: fadeInUp 0.8s ease-out forwards;
-    animation-delay: 0.8s; /* After text appears */
-}
-
-
 /* Hero Section Styles */
 .hero-section {
     background: linear-gradient(to right, #808080, #C4A484);
@@ -121,6 +184,34 @@ body {
     margin-bottom: 20px;
     overflow: hidden; /* Important to hide elements before their animation starts */
 }
+
+/* Initial state for hero elements before animation */
+.hero-section .greeting,
+.hero-section .name,
+.hero-section .role,
+.hero-section img {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Styles applied when the 'animate-visible' class is added by JS for hero elements */
+.hero-section .greeting.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.2s; /* Delay for sequential appearance */
+}
+.hero-section .name.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.4s;
+}
+.hero-section .role.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.6s;
+}
+.hero-section img.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.8s; /* After text appears */
+}
+
 
 .greeting {
     font-size: 2.5em;
@@ -132,14 +223,14 @@ body {
 .name {
     font-size: 3.5em;
     font-weight: 700;
+    margin: 0 auto; /* Correctly centers horizontally */
     margin-top: 0;
-    margin-bottom: -0.1em;
+    margin-bottom: -0.1em; /* Adjust as needed for spacing */
     color:white;
-    margin: 0 auto;
 }
 
 .name span {
-    color: #ff5722;
+    color: #ff5722; /* Accent color for name */
 }
 
 .role {
@@ -159,10 +250,29 @@ body {
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: block;
-    margin: 0 auto;
+    margin: 20px auto 0 auto; /* Ensures centering and adds top margin */
+}
+
+/* Optional Call to Action Button in Hero */
+.btn-primary {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    margin-top: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 
+/* General Content Styling */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -201,7 +311,7 @@ h3 {
     font-size: 1.6em;
     margin-top: 25px;
     margin-bottom: 10px;
-    color: #007bff;
+    color: #007bff; /* Primary accent color */
 }
 
 p {
@@ -211,7 +321,7 @@ p {
 a {
     color: #007bff;
     text-decoration: none;
-    transition: color 0.3s ease; /* Keep for hover effects */
+    transition: color 0.3s ease;
 }
 
 a:hover {
@@ -229,7 +339,7 @@ li {
     margin-bottom: 5px;
 }
 
-/* --- Sections (General Styling & Animation on Load/Scroll) --- */
+/* --- Sections (General Styling & Animation on Scroll) --- */
 section {
     padding: 60px 20px;
     margin: 20px auto;
@@ -238,23 +348,18 @@ section {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     max-width: 1000px;
 
-    /* Animation for sections - they will appear smoothly */
-    opacity: 0; /* Start invisible */
-    transform: translateY(20px); /* Start slightly below */
-    animation: fadeInUp 0.7s ease-out forwards;
-    /* Add a class to apply animation only when visible.
-       This typically requires JavaScript (Intersection Observer API) for true "on-scroll" animation.
-       For now, they will animate when the page loads. */
+    /* Initial state for elements that will be animated on scroll */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* Fallback transition if JS fails or for initial load */
 }
 
-/* Specific section adjustments */
-#about { animation-delay: 1s; } /* Delay for about section */
-#projects { animation-delay: 1.2s; } /* Delay for projects section */
-#skills { animation-delay: 1.4s; }
-#resume { animation-delay: 1.6s; }
-#certifications { animation-delay: 1.8s; }
-#contact { animation-delay: 2s; }
-#blog { animation-delay: 2.2s; }
+/* Styles applied when the 'animate-visible' class is added by JS */
+section.animate-visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.7s ease-out forwards;
+}
 
 
 #about ul,
@@ -289,12 +394,12 @@ section {
     padding: 25px;
     margin-bottom: 25px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add shadow to transition */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 #projects article:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* More pronounced shadow on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 #projects article h3 {
@@ -313,31 +418,31 @@ section {
     background-color: #007bff;
     color: #fff;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for button hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #projects article a:hover {
     background-color: #0056b3;
     text-decoration: none;
-    transform: scale(1.05); /* Slight scale on link hover */
+    transform: scale(1.05);
 }
 
 /* --- Resume Section --- */
 #resume a {
     display: inline-block;
     padding: 12px 25px;
-    background-color: #28a745;
+    background-color: #28a745; /* Green for download button */
     color: #fff;
     border-radius: 5px;
     font-size: 1.1em;
     margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for button hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #resume a:hover {
     background-color: #218838;
     text-decoration: none;
-    transform: scale(1.05); /* Slight scale on button hover */
+    transform: scale(1.05);
 }
 
 /* --- Certifications Section --- */
@@ -348,12 +453,12 @@ section {
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add transition for hover */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 #certifications article:hover {
-    transform: translateY(-3px); /* Slight lift on hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 #certifications article h3 {
@@ -373,11 +478,11 @@ section {
     display: block;
     margin-top: 15px;
     border-radius: 5px;
-    transition: transform 0.3s ease; /* Add transition for hover */
+    transition: transform 0.3s ease;
 }
 
 #certifications article img:hover {
-    transform: scale(1.02); /* Slight zoom on image hover */
+    transform: scale(1.02);
 }
 
 
@@ -412,15 +517,15 @@ section {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #contact input[type="text"]:focus,
 #contact input[type="email"]:focus,
 #contact textarea:focus {
-    border-color: #007bff; /* Highlight border on focus */
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Subtle glow on focus */
-    outline: none; /* Remove default outline */
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    outline: none;
 }
 
 #contact textarea {
@@ -436,12 +541,12 @@ section {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1em;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for button hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #contact button:hover {
     background-color: #0056b3;
-    transform: scale(1.03); /* Slight scale on button hover */
+    transform: scale(1.03);
 }
 
 #contact p {
@@ -456,12 +561,12 @@ section {
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add transition for hover */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 #blog article:hover {
-    transform: translateY(-3px); /* Slight lift on hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 #blog article h3 {
@@ -500,14 +605,14 @@ footer nav ul li a:hover {
     color: #007bff;
 }
 
-footer div a {
+.social-links a { /* Changed from footer div a to be more specific with a class */
     color: #fff;
     margin: 0 10px;
     font-size: 1.1em;
     transition: color 0.3s ease;
 }
 
-footer div a:hover {
+.social-links a:hover {
     color: #007bff;
 }
 
@@ -596,9 +701,14 @@ footer a[href*="terms-privacy"]:hover {
         gap: 10px;
     }
 
-    footer div a {
+    .social-links a { /* Changed from footer div a to be more specific */
         display: block;
         margin-bottom: 10px;
+    }
+
+    /* Login overlay adjustments for smaller screens */
+    .login-container {
+        padding: 30px 20px;
     }
 }
 
@@ -612,8 +722,14 @@ footer a[href*="terms-privacy"]:hover {
         font-size: 1.6em;
     }
 
-    .hero-section p {
-        font-size: 1.1em;
+    .greeting {
+        font-size: 1.8em; /* Adjusted for smaller screens */
+    }
+    .name {
+        font-size: 2.5em; /* Adjusted for smaller screens */
+    }
+    .role {
+        font-size: 1.2em; /* Adjusted for smaller screens */
     }
 
     .hero-section img {
