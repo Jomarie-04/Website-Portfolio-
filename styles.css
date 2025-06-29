@@ -7,7 +7,7 @@
 
 /* Base Body Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif; /* Changed to Inter to match HTML link */
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
@@ -650,6 +650,79 @@ footer a[href*="terms-privacy"] {
 
 footer a[href*="terms-privacy"]:hover {
     color: #007bff;
+}
+
+/* --- Family Tree Specific CSS --- */
+.family-tree-container {
+    position: relative;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.parents-row {
+    position: relative;
+    margin-bottom: 80px;
+}
+
+.parents-row::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px; /* Approximate width needed to span between two images with space-x-12 */
+    left: calc(50% - 60px); /* Start 60px left of center */
+    margin-left: -60px; /* To account for width from center */
+    top: 50%;
+    height: 2px;
+    background-color: #9CA3AF;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.parents-row::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    width: 2px;
+    height: 80px;
+    background-color: #9CA3AF;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.children-row {
+    position: relative;
+    padding-top: 40px;
+}
+
+.children-row::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(100% - 100px);
+    height: 2px;
+    background-color: #9CA3AF;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.children-row .member::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background-color: #9CA3AF;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+
+.member {
+    position: relative;
+    z-index: 1;
 }
 
 /* --- Responsive Design (Media Queries) --- */
