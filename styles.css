@@ -401,14 +401,7 @@ section.animate-visible {
     padding-left: 25px;
 }
 
-#about li::before,
-#skills li::before {
-    content: '•';
-    color: #007bff;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
+
 
 /* --- Projects Section --- */
 #projects article {
@@ -843,8 +836,4 @@ footer a[href*="terms-privacy"]:hover {
         padding: 30px 10px;
     }
 
-    #resume a {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
 }
