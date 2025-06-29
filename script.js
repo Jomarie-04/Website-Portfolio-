@@ -6,11 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginOverlay = document.getElementById('login-overlay');
     const portfolioContent = document.getElementById('portfolio-content');
     const logoutBtn = document.getElementById('logout-btn'); // Get the new logout button
+    const heroElements = document.querySelectorAll('.hero-section .greeting, .hero-section .name, .hero-section .role, .hero-section img');
+
+
+    // Function to show portfolio and animate hero section
+    const showPortfolioAndAnimateHero = () => {
+        loginOverlay.style.display = 'none';
+        portfolioContent.classList.remove('hidden');
+        heroElements.forEach(element => {
+            element.classList.add('animate-visible');
+        });
+    };
 
     // Check if user is already "logged in" (e.g., from a previous session)
     if (sessionStorage.getItem('loggedIn') === 'true') {
-        loginOverlay.style.display = 'none';
-        portfolioContent.classList.remove('hidden');
+        showPortfolioAndAnimateHero();
     } else {
         loginOverlay.style.display = 'flex'; // Ensure it's visible if not logged in
         portfolioContent.classList.add('hidden'); // Ensure content is hidden
@@ -29,9 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hardcoded credentials for demonstration (INSECURE!)
             if (username === 'jomarie' && password === 'jomarie4') {
                 sessionStorage.setItem('loggedIn', 'true'); // "Log in" the user
-                loginOverlay.style.display = 'none'; // Hide the login overlay
-                portfolioContent.classList.remove('hidden'); // Show portfolio content
+                showPortfolioAndAnimateHero(); // Show and animate
             } else {
+                // Using a simple alert for demonstration, in a real app, use a custom modal
                 alert('Invalid username or password. (Hint: jomarie / jomarie4)');
                 // Clear password field for security
                 passwordInput.value = '';
@@ -39,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NEW: Logout Logic ---
+    // --- Logout Logic ---
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function() {
             sessionStorage.removeItem('loggedIn'); // Remove the login status
@@ -47,9 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
             portfolioContent.classList.add('hidden'); // Hide portfolio content
             // Optional: Scroll to the top of the page after logout
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Remove animation classes from hero elements so they can animate again on next login
+            heroElements.forEach(element => {
+                element.classList.remove('animate-visible');
+            });
         });
     }
-    // --- END OF INSECURE LOGIN/LOGOUT LOGIC ---
 
 
     // --- Smooth scroll for internal anchor links ---
@@ -98,7 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Intersection Observer for "on-scroll" animations ---
-    const animatedElements = document.querySelectorAll('section, .hero-section .greeting, .hero-section .name, .hero-section .role, .hero-section img');
+    // Note: Hero elements are now handled by showPortfolioAndAnimateHero() on load/login
+    const animatedSections = document.querySelectorAll('section'); // Only observe sections here
 
     const observerOptions = {
         root: null, // Use the viewport as the root
@@ -117,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe each relevant element
-    animatedElements.forEach(element => {
+    // Observe each relevant section
+    animatedSections.forEach(element => {
         elementObserver.observe(element);
     });
 
@@ -134,7 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const navbarHeight = mainNavbar.offsetHeight; // Get current navbar height
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - navbarHeight - 50;
+            // Adjust sectionTop to account for navbar height, so activation is accurate
+            const sectionTop = section.offsetTop - navbarHeight - 50; // Added extra 50px buffer
             const sectionHeight = section.offsetHeight;
 
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
