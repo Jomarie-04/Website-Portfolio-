@@ -392,15 +392,14 @@ section.animate-visible {
     -webkit-columns: 2;
     -moz-columns: 2;
     padding-left: 20px;
+    list-style: none; /* Added this to specifically remove the default dot */
 }
 
 #about li,
 #skills li {
     margin-bottom: 10px;
-    position: relative;
-    padding-left: 25px;
+    /* Removed: position: relative; and padding-left: 25px; as per previous instruction */
 }
-
 
 
 /* --- Projects Section --- */
@@ -597,7 +596,14 @@ footer {
     color: #fff;
     text-align: center;
     padding: 30px 20px;
-    margin-top: 40px;
+    /* margin-top: 40px; This can be removed as fixed positioning overrides it */
+
+    /* --- ADDED/MODIFIED FOR FIXED FOOTER --- */
+    position: fixed; /* Makes the footer stick to the viewport */
+    bottom: 0;       /* Aligns it to the bottom of the viewport */
+    width: 100%;     /* Ensures it spans the full width */
+    z-index: 999;    /* Ensures it stays on top of other content */
+    /* --- END ADDED/MODIFIED --- */
 }
 
 footer p {
@@ -771,10 +777,13 @@ footer a[href*="terms-privacy"]:hover {
         padding-left: 0;
     }
 
+    /* This block should be removed if you don't want any custom bullets */
+    /*
     #about li::before,
     #skills li::before {
         display: none;
     }
+    */
 
     #projects article a {
         display: block;
@@ -835,5 +844,12 @@ footer a[href*="terms-privacy"]:hover {
     section {
         padding: 30px 10px;
     }
+}
 
+/* NEW RULE: Add padding to portfolio content to prevent fixed footer overlap */
+#portfolio-content {
+    padding-bottom: 150px; /* Adjust this value to match your footer's height */
+    /* You might need to experiment with this value (e.g., 100px, 120px, 180px)
+       to find the perfect fit, depending on the footer's actual rendered height
+       including its padding and content. */
 }
